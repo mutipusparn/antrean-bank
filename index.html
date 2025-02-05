@@ -38,7 +38,7 @@
             
             let tableHTML = "";
             for (let i = 1; i < rows.length; i++) {  // Mulai dari indeks 1 karena indeks 0 adalah header
-                const [noAntrian, nama, status] = rows[i];
+                const [noAntrian, status] = rows[i];
                 tableHTML += `<tr>
                     <td>${noAntrian}</td>
                     <td>${status}</td>
