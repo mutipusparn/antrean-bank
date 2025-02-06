@@ -1,128 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antrean Bank</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
+/* Mengatur font dasar untuk seluruh halaman */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
 
-        h1 {
-            text-align: center;
-            padding: 20px;
-            background-color: #4CAF50;
-            color: white;
-            margin-bottom: 20px;
-        }
+/* Gaya untuk kontainer utama */
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+}
 
-        table {
-            width: 80%;
-            margin: 0 auto;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+/* Gaya untuk judul halaman */
+.title {
+    text-align: center;
+    color: #001f3f; /* Biru Tua */
+    margin-bottom: 20px;
+}
 
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+/* Gaya untuk tabel antrian */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
 
-        td {
-            background-color: #f9f9f9;
-        }
+th {
+    background-color: #001f3f; /* Biru Tua */
+    color: #ffffff; /* Putih */
+}
 
-        tr:nth-child(even) td {
-            background-color: #f2f2f2;
-        }
+tr:nth-child(even) {
+    background-color: #f0f0f0; /* Abu-abu Terang */
+}
 
-        tr:hover {
-            background-color: #ddd;
-        }
+/* Gaya untuk tombol */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #dc143c; /* Merah */
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-        #queueTable {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .status {
-            font-weight: bold;
-        }
-
-        .pending {
-            color: orange;
-        }
-
-        .serving {
-            color: green;
-        }
-
-        .completed {
-            color: gray;
-        }
-    </style>
-</head>
-<body>
-    <h1>Antrean Bank - Cek Nomor Antrian</h1>
-    <table id="queueTable">
-        <thead>
-            <tr>
-                <th>No. Antrian</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody id="queueBody">
-            <!-- Data antrean akan muncul di sini -->
-        </tbody>
-    </table>
-
-    <script>
-        async function fetchQueueData() {
-            console.log("Memuat data antrean...");
-            try {
-                const response = await fetch('YOUR_CSV_FILE_LINK');
-                const data = await response.text();
-                const rows = data.split("\n").map(row => row.split(","));
-
-                let tableHTML = "";
-
-                // Menampilkan hanya 3 nomor antrian pertama
-                for (let i = 1; i < rows.length; i++) {
-                    if (rows[i].length < 2) continue;
-
-                    const [noAntrian, status] = rows[i];
-
-                    // Menambahkan kelas status sesuai dengan kondisi
-                    let statusClass = 'pending';
-                    if (status === 'Sedang Dilayani') statusClass = 'serving';
-                    if (status === 'Selesai') statusClass = 'completed';
-
-                    tableHTML += `<tr>
-                        <td>${noAntrian}</td>
-                        <td class="status ${statusClass}">${status}</td>
-                    </tr>`;
-                }
-
-                document.getElementById("queueBody").innerHTML = tableHTML || "<tr><td colspan='2'>Tidak ada antrean</td></tr>";
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                document.getElementById("queueBody").innerHTML = "<tr><td colspan='2'>Gagal memuat data</td></tr>";
-            }
-        }
-
-        fetchQueueData();
-    </script>
-</body>
-</html>
+.button:hover {
+    background-color: #ffd700; /* Kuning Emas */
+    color: #001f3f; /* Biru Tua */
+}
